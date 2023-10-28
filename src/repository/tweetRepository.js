@@ -7,11 +7,22 @@ export default class TweetRepository extends CrudRepository {
   }
   async getAllTweet() {
     try {
-      const result = await this.model.find({}).populate({
-        path: "user",
-        select: "username",
-        // Specify the field(s) you want to populate
-      });
+      const result = await this.model
+        .find({})
+        .populate({
+          path: "createdby",
+          select: "username",
+        })
+        .populate({
+          path: "comments",
+
+          populate: { path: "user", select: "username" },
+        })
+        .populate({
+          path: "likes",
+          select: "user",
+          populate: { path: "user", select: "username" },
+        });
       return result;
     } catch (error) {
       console.log("Something went wrong in crud repo");
@@ -20,11 +31,19 @@ export default class TweetRepository extends CrudRepository {
   }
   async getTweet(id) {
     try {
-      const result = await this.model.findOne({ _id: id }).populate({
-        path: "user",
-        select: "username",
-        // Specify the field(s) you want to populate
-      });
+      const result = await this.model
+        .findOne({ _id: id })
+        .populate({
+          path: "createdby",
+          select: "username",
+
+          // Specify the field(s) you want to populate
+        })
+        .populate({
+          path: "likes",
+          select: "user",
+          populate: { path: "user", select: "username" },
+        });
       return result;
     } catch (error) {
       console.log("Something went wrong in crud repo");

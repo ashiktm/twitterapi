@@ -4,8 +4,8 @@ const likeSerivce = new LikeSerivce();
 
 export const toggleLike = async (req, res) => {
   try {
-    const data = req.body;
-
+    let data = req.body;
+    data.user = req.user._id;
     console.log(data);
     const response = await likeSerivce.toggleLike(data);
     return res.status(200).json({

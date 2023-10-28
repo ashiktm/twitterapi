@@ -10,9 +10,10 @@ const tweetSchema = new mongoose.Schema({
     type: Number,
   },
   comments: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],
-  user: {
+  createdby: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
 });
 const Tweet = mongoose.model("Tweet", tweetSchema);

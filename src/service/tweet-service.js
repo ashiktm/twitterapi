@@ -15,7 +15,7 @@ export default class TweetService {
       console.log(content);
       const tag = content.match(/#+[a-zA-Z0-9(_)]+/g).map((tag) => tag.substring(1).toLowerCase());
 
-      const tweet = await this.tweetRepository.create({ ...data, user: data.user._id });
+      const tweet = await this.tweetRepository.create({ ...data, createdby: data.user._id });
       const alreadyPresentTag = await this.hashtagRepository.gethashtagByName(tag);
       const alreadyPresentTagText = alreadyPresentTag.map((tag) => tag.text);
       let createTag = tag.filter((dat) => !alreadyPresentTagText.includes(dat));
@@ -33,7 +33,8 @@ export default class TweetService {
         console.log(tag);
         tag.save();
       });
-      return tweet;
+      const tweet2 = await this.tweetRepository.getTweet(tweet.id);
+      return tweet2;
     } catch (error) {
       console.log(error);
       throw error;

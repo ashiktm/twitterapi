@@ -9,17 +9,17 @@ export class LikeSerivce {
     this.commentRepository = new CommentRepository();
   }
 
-  async toggleLike({ modelId, modelType, userId }) {
+  async toggleLike({ likable, onModel, user }) {
     let likeable;
-    if (modelType === "Tweet") {
-      likeable = await this.tweetRepository.get(modelId);
-    } else if (modelType === "Comment") {
-      likeable = await this.commentRepository.get(modelId);
+    if (onModel === "Tweet") {
+      likeable = await this.tweetRepository.getTweet(likable);
+    } else if (onModel === "Comment") {
+      likeable = await this.commentRepository.get(likable);
     }
     let exists = await this.likeRepository.findby({
-      onModel: modelType,
-      user: userId,
-      likable: modelId,
+      onModel: onModel,
+      user: user,
+      likable: likable,
     });
     if (exists) {
       console.log(exists);
@@ -28,13 +28,15 @@ export class LikeSerivce {
       await this.likeRepository.destroy(exists.id);
     } else {
       let newLike = await this.likeRepository.create({
-        onModel: modelType,
-        user: userId,
-        likable: modelId,
+        onModel: onModel,
+        user: user,
+        likable: likable,
       });
       console.log("newLike", newLike);
       likeable.likes.push(newLike);
       await likeable.save();
     }
+
+    return likeable;
   }
 }

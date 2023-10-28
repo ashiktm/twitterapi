@@ -9,13 +9,16 @@ export default class CommentService {
 
   async create(data) {
     try {
-      const comment = await this.commentRepository.create(data);
+      let comment = await this.commentRepository.create(data);
+      comment.user = data.username;
       if (data.onModel === "Tweet") {
         let tweet = await this.tweetRepository.get(data.commentable);
         tweet.comments.push(comment);
         await tweet.save();
       } else if (data.onModel === "Tweet") {
       }
+      const comment2 = await this.commentRepository.getComment(comment.id);
+      return comment2;
       return comment;
     } catch (error) {
       console.log(error);

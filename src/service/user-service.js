@@ -18,7 +18,7 @@ export default class UserService {
   async login(data) {
     try {
       const user = await this.userRepository.findby({ email: data.email });
-      console.log(user.comparePassword);
+      console.log("user", user);
       if (!user) {
         throw {
           message: "no  user found",
@@ -31,7 +31,6 @@ export default class UserService {
         };
       }
       const token = user.genJWT();
-      console.log(auth);
 
       return token;
     } catch (error) {

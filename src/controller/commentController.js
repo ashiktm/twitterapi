@@ -4,8 +4,9 @@ const commentService = new CommentService();
 
 export const createComment = async (req, res) => {
   try {
-    const data = req.body;
-
+    let data = req.body;
+    data.user = req.user._id;
+    data.username = req.user.username;
     console.log(data);
     const response = await commentService.create(data);
     return res.status(200).json({

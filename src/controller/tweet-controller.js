@@ -8,11 +8,10 @@ export const createTweet = async (req, res) => {
     data.user = req.user._id;
     console.log("bbbbb", req.user);
     let response = await tweetService.create(data);
-    let data1 = await tweetService.getTweet(response._id);
     return res.status(200).json({
       success: true,
       message: "data created successfully",
-      data: data1,
+      data: response,
       err: {},
     });
   } catch (error) {
