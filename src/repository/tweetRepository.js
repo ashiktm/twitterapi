@@ -13,11 +13,45 @@ export default class TweetRepository extends CrudRepository {
           path: "createdby",
           select: "username",
         })
-        .populate({
-          path: "comments",
+        .populate([
+          {
+            path: "comments",
+            populate: {
+              path: "likes",
+              select: "username user",
+              populate: [{ path: "user", select: "username" }],
+            },
+          },
+        ])
+        .populate([
+          {
+            path: "comments",
+            populate: {
+              path: "comments",
 
-          populate: { path: "user", select: "username" },
-        })
+              populate: { path: "user", select: "username" },
+            },
+          },
+        ])
+        .populate([
+          {
+            path: "comments",
+            populate: {
+              path: "comments",
+
+              populate: { path: "comments", populate: { path: "user", select: "username" } },
+            },
+          },
+        ])
+        .populate([
+          {
+            path: "comments",
+            populate: {
+              path: "user",
+              select: "username user",
+            },
+          },
+        ])
         .populate({
           path: "likes",
           select: "user",
@@ -48,6 +82,41 @@ export default class TweetRepository extends CrudRepository {
     } catch (error) {
       console.log("Something went wrong in crud repo");
       throw error;
+    }
+  }
+  async populateCommentsRecursively(comment) {
+    if (comment.comments && comment.comments.length > 0) {
+      const result = await comment
+        .populate({
+          path: "comments",
+          populate: [
+            {
+              path: "likes",
+              select: "username user",
+              populate: {
+                path: "user",
+                select: "username",
+              },
+            },
+            {
+              path: "comments",
+              populate: {
+                path: "user",
+                select: "username",
+              },
+            },
+            {
+              path: "user",
+              select: "username user",
+            },
+          ],
+        })
+        .execPopulate();
+
+      for (const subComment of comment.comments) {
+        await populateCommentsRecursively(subComment);
+      }
+      return result;
     }
   }
 }

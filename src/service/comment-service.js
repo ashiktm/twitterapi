@@ -15,7 +15,11 @@ export default class CommentService {
         let tweet = await this.tweetRepository.get(data.commentable);
         tweet.comments.push(comment);
         await tweet.save();
-      } else if (data.onModel === "Tweet") {
+      } else if (data.onModel === "Comment") {
+        let comment2 = await this.commentRepository.get(data.commentable);
+        console.log("comment", comment2);
+        comment2.comments.push(comment);
+        await comment2.save();
       }
       const comment2 = await this.commentRepository.getComment(comment.id);
       return comment2;
