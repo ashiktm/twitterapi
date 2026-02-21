@@ -70,8 +70,20 @@ export default class TweetRepository extends CrudRepository {
         .populate({
           path: "createdby",
           select: "username",
-
-          // Specify the field(s) you want to populate
+        })
+        .populate({
+          path: "comments",
+          populate: [
+            {
+              path: "user",
+              select: "username",
+            },
+            {
+              path: "likes",
+              select: "user",
+              populate: { path: "user", select: "username" },
+            },
+          ],
         })
         .populate({
           path: "likes",
