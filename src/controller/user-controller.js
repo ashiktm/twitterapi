@@ -52,3 +52,58 @@ export const loginUser = async (req, res) => {
     });
   }
 };
+
+export const updateProfile = async (req, res) => {
+  try {
+    const data = req.body;
+    const userId = req.user._id;
+    const updateSchema = {};
+    if (data.bio !== undefined) updateSchema.bio = data.bio;
+    if (data.profilePicture !== undefined) updateSchema.profilePicture = data.profilePicture;
+
+    const response = await userService.updateProfile(userId, updateSchema);
+    return res.status(200).json({
+      success: true,
+      message: "profile updated successfully",
+      data: {
+        bio: response.bio,
+        username: response.username,
+        email: response.email,
+        profilePicture: response.profilePicture
+      },
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "something went wrong",
+      data: {},
+      err: error,
+    });
+  }
+};
+
+export const getProfile = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const response = await userService.getProfile(userId);
+    return res.status(200).json({
+      success: true,
+      message: "profile fetched successfully",
+      data: {
+        bio: response.bio,
+        username: response.username,
+        email: response.email,
+        profilePicture: response.profilePicture
+      },
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "something went wrong",
+      data: {},
+      err: error,
+    });
+  }
+};

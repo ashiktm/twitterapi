@@ -38,4 +38,27 @@ export default class UserService {
       throw error;
     }
   }
+
+  async updateProfile(userId, data) {
+    try {
+      const user = await this.userRepository.update(userId, data);
+      return user;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  async getProfile(userId) {
+    try {
+      const user = await this.userRepository.get(userId);
+      if (!user) {
+        throw { message: "no user found" };
+      }
+      return user;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 }

@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema({
   bio: {
     type: String,
   },
+  profilePicture: {
+    type: String,
+  },
   tweets: [
     {
       type: mongoose.Schema.Types.ObjectId,
