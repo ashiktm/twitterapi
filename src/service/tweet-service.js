@@ -48,4 +48,17 @@ export default class TweetService {
     const tweet = await this.tweetRepository.getAllTweet();
     return tweet;
   }
+
+  async getTweetsByHashtag(tagText) {
+    const formattedTag = tagText.startsWith("#")
+      ? tagText.substring(1).toLowerCase()
+      : tagText.toLowerCase();
+    const hashtag = await this.hashtagRepository.gethashtagByName(formattedTag);
+    if (!hashtag || hashtag.length === 0) {
+      return [];
+    }
+    const tweetIds = hashtag[0].tweets;
+    const tweets = await this.tweetRepository.getAllTweet({ _id: { $in: tweetIds } });
+    return tweets;
+  }
 }

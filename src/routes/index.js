@@ -1,7 +1,7 @@
 import express from "express";
 import { createComment } from "../controller/commentController.js";
 import { toggleLike } from "../controller/toggleLike-controller.js";
-import { createTweet, getTweet, getTweetAll } from "../controller/tweet-controller.js";
+import { createTweet, getTweet, getTweetAll, searchTweetByTag } from "../controller/tweet-controller.js";
 import { createUser, loginUser } from "../controller/user-controller.js";
 import { authenticate } from "../middleware/authenticate.js";
 
@@ -14,5 +14,6 @@ router.post("/likes/toggle", authenticate, toggleLike);
 router.post("/comment", authenticate, createComment);
 router.get("/tweet/:id", getTweet);
 router.get("/tweets", getTweetAll);
+router.get("/tweets/search/:tag", searchTweetByTag);
 
 export default router;

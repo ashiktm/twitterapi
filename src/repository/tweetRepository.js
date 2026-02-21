@@ -5,10 +5,10 @@ export default class TweetRepository extends CrudRepository {
   constructor() {
     super(Tweet);
   }
-  async getAllTweet() {
+  async getAllTweet(query = {}) {
     try {
       const result = await this.model
-        .find({})
+        .find(query)
         .populate({
           path: "createdby",
           select: "username",

@@ -61,3 +61,23 @@ export const getTweetAll = async (req, res) => {
     });
   }
 };
+
+export const searchTweetByTag = async (req, res) => {
+  try {
+    const tag = req.params.tag;
+    const response = await tweetService.getTweetsByHashtag(tag);
+    return res.status(200).json({
+      success: true,
+      message: "Tweets fetched successfully by tag",
+      data: response,
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "something went wrong",
+      data: {},
+      err: error,
+    });
+  }
+};
