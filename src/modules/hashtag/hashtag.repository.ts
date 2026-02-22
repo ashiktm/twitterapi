@@ -16,7 +16,8 @@ export default class hashtagRepository extends CrudRepository<IHashtag> {
   }
   async gethashtagByName(name: string | string[]) {
     try {
-      let hashtag = await Hashtag.find({ text: name });
+      let query = Array.isArray(name) ? { text: { $in: name } } : { text: { $regex: name, $options: "i" } };
+      let hashtag = await Hashtag.find(query);
       return hashtag;
     } catch (error) {
       console.log(error);
