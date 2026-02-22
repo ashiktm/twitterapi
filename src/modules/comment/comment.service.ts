@@ -2,27 +2,31 @@ import CommentRepository from "../comment/comment.repository.js";
 import TweetRepository from "../tweet/tweet.repository.js";
 
 export default class CommentService {
-  commentRepository: any;
-  tweetRepository: any;
+  commentRepository: CommentRepository;
+  tweetRepository: TweetRepository;
 
   constructor() {
     this.commentRepository = new CommentRepository();
     this.tweetRepository = new TweetRepository();
   }
 
-  async create(data) {
+  async create(data: any) {
     try {
       let comment = await this.commentRepository.create(data);
       comment.user = data.username;
       if (data.onModel === "Tweet") {
-        let tweet = await this.tweetRepository.get(data.commentable);
-        tweet.comments.push(comment);
-        await tweet.save();
+        let tweet: any = await this.tweetRepository.get(data.commentable);
+        if (tweet) {
+          tweet.comments.push(comment.id);
+          await tweet.save();
+        }
       } else if (data.onModel === "Comment") {
-        let comment2 = await this.commentRepository.get(data.commentable);
+        let comment2: any = await this.commentRepository.get(data.commentable);
         console.log("comment", comment2);
-        comment2.comments.push(comment);
-        await comment2.save();
+        if (comment2) {
+          comment2.comments.push(comment.id);
+          await comment2.save();
+        }
       }
       const comment2 = await this.commentRepository.getComment(comment.id);
       return comment2;
@@ -32,7 +36,7 @@ export default class CommentService {
       throw error;
     }
   }
-  async getComment(id) {
+  async getComment(id: string) {
     const comment = await this.commentRepository.get(id);
     return comment;
   }

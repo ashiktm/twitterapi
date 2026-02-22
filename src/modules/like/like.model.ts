@@ -1,13 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Types, Model } from "mongoose";
 
-const likeSchema = new mongoose.Schema({
+export interface ILike extends Document {
+  onModel: "Tweet" | "Comment";
+  likable: Types.ObjectId;
+  user: Types.ObjectId;
+}
+
+const likeSchema = new mongoose.Schema<ILike>({
   onModel: {
     type: String,
     required: true,
     enum: ["Tweet", "Comment"],
   },
   likable: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     refPath: "onModel",
   },
@@ -16,6 +22,6 @@ const likeSchema = new mongoose.Schema({
     ref: "User",
   },
 });
-const Like = mongoose.model("Like", likeSchema);
+const Like = mongoose.model<ILike>("Like", likeSchema);
 
 export default Like;

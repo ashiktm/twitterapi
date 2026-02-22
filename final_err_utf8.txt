@@ -1,0 +1,18 @@
+﻿src/modules/comment/comment.service.ts(13,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/modules/comment/comment.service.ts(35,20): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/modules/like/like.service.ts(16,22): error TS7031: Binding element 'likable' implicitly has an 'any' type.
+src/modules/like/like.service.ts(16,31): error TS7031: Binding element 'onModel' implicitly has an 'any' type.
+src/modules/like/like.service.ts(16,40): error TS7031: Binding element 'user' implicitly has an 'any' type.
+src/modules/tweet/tweet.service.ts(13,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/modules/tweet/tweet.service.ts(19,60): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/modules/tweet/tweet.service.ts(23,60): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/modules/tweet/tweet.service.ts(24,35): error TS7006: Parameter 'dat' implicitly has an 'any' type.
+src/modules/tweet/tweet.service.ts(25,34): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/modules/tweet/tweet.service.ts(34,40): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/modules/tweet/tweet.service.ts(46,18): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/modules/tweet/tweet.service.ts(55,28): error TS7006: Parameter 'tagText' implicitly has an 'any' type.
+src/modules/user/user.service.ts(10,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/modules/user/user.service.ts(20,15): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/modules/user/user.service.ts(44,23): error TS7006: Parameter 'userId' implicitly has an 'any' type.
+src/modules/user/user.service.ts(44,31): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/modules/user/user.service.ts(54,20): error TS7006: Parameter 'userId' implicitly has an 'any' type.

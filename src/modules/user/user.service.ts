@@ -1,13 +1,13 @@
 import UserRepository from "../user/user.repository.js";
 
 export default class UserService {
-  userRepository: any;
+  userRepository: UserRepository;
 
   constructor() {
     this.userRepository = new UserRepository();
   }
 
-  async signup(data) {
+  async signup(data: any) {
     try {
       const user = await this.userRepository.create(data);
 
@@ -17,7 +17,7 @@ export default class UserService {
       throw error;
     }
   }
-  async login(data) {
+  async login(data: any) {
     try {
       const user = await this.userRepository.findby({ email: data.email });
       console.log("user", user);
@@ -41,7 +41,7 @@ export default class UserService {
     }
   }
 
-  async updateProfile(userId, data) {
+  async updateProfile(userId: string, data: any) {
     try {
       const user = await this.userRepository.update(userId, data);
       return user;
@@ -51,7 +51,7 @@ export default class UserService {
     }
   }
 
-  async getProfile(userId) {
+  async getProfile(userId: string) {
     try {
       const user = await this.userRepository.get(userId);
       if (!user) {

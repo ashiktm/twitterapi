@@ -2,27 +2,27 @@ import hashtagRepository from "../hashtag/hashtag.repository.js";
 import TweetRepository from "../tweet/tweet.repository.js";
 
 export default class TweetService {
-  tweetRepository: any;
-  hashtagRepository: any;
+  tweetRepository: TweetRepository;
+  hashtagRepository: hashtagRepository;
 
   constructor() {
     this.tweetRepository = new TweetRepository();
     this.hashtagRepository = new hashtagRepository();
   }
 
-  async create(data) {
+  async create(data: any) {
     try {
       const content = data.content;
 
       console.log(data.user);
       console.log(content);
-      const tag = content.match(/#+[a-zA-Z0-9(_)]+/g).map((tag) => tag.substring(1).toLowerCase());
+      const tag = content.match(/#+[a-zA-Z0-9(_)]+/g).map((tag: any) => tag.substring(1).toLowerCase());
 
       const tweet = await this.tweetRepository.create({ ...data, createdby: data.user._id });
       const alreadyPresentTag = await this.hashtagRepository.gethashtagByName(tag);
-      const alreadyPresentTagText = alreadyPresentTag.map((tag) => tag.text);
-      let createTag = tag.filter((dat) => !alreadyPresentTagText.includes(dat));
-      createTag = createTag.map((tag) => {
+      const alreadyPresentTagText = alreadyPresentTag.map((tag: any) => tag.text);
+      let createTag = tag.filter((dat: any) => !alreadyPresentTagText.includes(dat));
+      createTag = createTag.map((tag: any) => {
         return {
           text: tag,
           tweets: [tweet.id],
@@ -31,7 +31,7 @@ export default class TweetService {
 
       await this.hashtagRepository.bulkCreate(createTag);
       //   if (alreadyPresentTag.length > 1)
-      alreadyPresentTag.forEach(async (tag) => {
+      alreadyPresentTag.forEach(async (tag: any) => {
         tag.tweets.push(tweet.id);
         console.log(tag);
         tag.save();
@@ -43,7 +43,7 @@ export default class TweetService {
       throw error;
     }
   }
-  async getTweet(id) {
+  async getTweet(id: string) {
     const tweet = await this.tweetRepository.getTweet(id);
     return tweet;
   }
@@ -52,7 +52,7 @@ export default class TweetService {
     return tweet;
   }
 
-  async getTweetsByHashtag(tagText) {
+  async getTweetsByHashtag(tagText: string) {
     const formattedTag = tagText.startsWith("#")
       ? tagText.substring(1).toLowerCase()
       : tagText.toLowerCase();

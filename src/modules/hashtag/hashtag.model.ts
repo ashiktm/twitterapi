@@ -1,6 +1,11 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Types, Model } from "mongoose";
 
-const hashtagSchema = new mongoose.Schema({
+export interface IHashtag extends Document {
+  text: string;
+  tweets: Types.ObjectId[];
+}
+
+const hashtagSchema = new mongoose.Schema<IHashtag>({
   text: {
     type: String,
     required: true,
@@ -9,9 +14,10 @@ const hashtagSchema = new mongoose.Schema({
   tweets: [
     {
       type: mongoose.Schema.Types.ObjectId,
+      ref: "Tweet",
     },
   ],
 });
-const Hashtag = mongoose.model("Hashtag", hashtagSchema);
+const Hashtag = mongoose.model<IHashtag>("Hashtag", hashtagSchema);
 
 export default Hashtag;
