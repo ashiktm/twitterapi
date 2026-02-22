@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "tsx watch src/index.ts",
+    "start": "tsx watch src/server.ts",
     "build": "tsc",
-    "serve": "node dist/index.js",
+    "serve": "node dist/server.js",
     "swagger": "tsx src/config/openapi.ts",
     "prestart": "npm run swagger"
   },

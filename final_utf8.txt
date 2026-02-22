@@ -1,9 +1,0 @@
-﻿src/modules/comment/comment.controller.ts(33,54): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
-  Type 'string[]' is not assignable to type 'string'.
-src/modules/user/user.controller.ts(67,54): error TS2345: Argument of type 'ObjectId' is not assignable to parameter of type 'string'.
-src/modules/user/user.controller.ts(72,14): error TS18047: 'response' is possibly 'null'.
-src/modules/user/user.controller.ts(73,19): error TS18047: 'response' is possibly 'null'.
-src/modules/user/user.controller.ts(74,16): error TS18047: 'response' is possibly 'null'.
-src/modules/user/user.controller.ts(75,25): error TS18047: 'response' is possibly 'null'.
-src/modules/user/user.controller.ts(92,51): error TS2345: Argument of type 'string | string[]' is not assignable to parameter of type 'string'.
-  Type 'string[]' is not assignable to type 'string'.
