@@ -22,15 +22,11 @@ export default class UserService {
       const user = await this.userRepository.findby({ email: data.email });
       console.log("user", user);
       if (!user) {
-        throw {
-          message: "no  user found",
-        };
+        throw new Error("no user found");
       }
       const auth = user.comparePassword(data.password);
       if (!auth) {
-        throw {
-          message: "Incorrect password",
-        };
+        throw new Error("Incorrect password");
       }
       const token = user.genJWT();
 
@@ -55,7 +51,7 @@ export default class UserService {
     try {
       const user = await this.userRepository.get(userId);
       if (!user) {
-        throw { message: "no user found" };
+        throw new Error("no user found");
       }
       return user;
     } catch (error) {

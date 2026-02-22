@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import UserService from "../user/user.service.js";
+import { UserSignupBody, UserLoginBody, UpdateProfileBody } from "./user.schema.js";
 
 const userService = new UserService();
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: Request<{}, {}, UserSignupBody>, res: Response) => {
   try {
     const data = req.body;
 
@@ -24,7 +25,7 @@ export const createUser = async (req: Request, res: Response) => {
     });
   }
 };
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request<{}, {}, UserLoginBody>, res: Response) => {
   try {
     const data = req.body;
 
@@ -54,9 +55,9 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-export const updateProfile = async (req: Request, res: Response) => {
+export const updateProfile = async (req: Request<{}, {}, UpdateProfileBody>, res: Response) => {
   try {
-    const data = req.body;
+    const data: any = req.body;
     const userId = req.user?._id;
     if (!userId) return res.status(401).json({ success: false, message: "Unauthorized" });
 
@@ -64,7 +65,10 @@ export const updateProfile = async (req: Request, res: Response) => {
     if (data.bio !== undefined) updateSchema.bio = data.bio;
     if (data.profilePicture !== undefined) updateSchema.profilePicture = data.profilePicture;
 
-    const response = await userService.updateProfile(userId, updateSchema);
+    const response = await userService.updateProfile(userId.toString(), updateSchema);
+    if (!response) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
     return res.status(200).json({
       success: true,
       message: "profile updated successfully",
@@ -88,7 +92,7 @@ export const updateProfile = async (req: Request, res: Response) => {
 
 export const getProfile = async (req: Request, res: Response) => {
   try {
-    const userId = req.params.id;
+    const userId = req.params.id as string;
     const response = await userService.getProfile(userId);
     return res.status(200).json({
       success: true,
