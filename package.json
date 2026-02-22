@@ -5,9 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "swagger": "node swagger.js",
-    "prestart": "npm run swagger",
-    "start": "npx nodemon ./src/index"
+    "start": "tsx watch src/index.ts",
+    "build": "tsc",
+    "serve": "node dist/index.js",
+    "swagger": "tsx swagger.ts",
+    "prestart": "npm run swagger"
   },
   "author": "ashik",
   "license": "MIT",
@@ -24,5 +26,18 @@
     "passport-jwt": "^4.0.1",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^25.3.0",
+    "@types/passport-jwt": "^4.0.1",
+    "@types/swagger-ui-express": "^4.1.8",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
