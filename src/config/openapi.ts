@@ -170,7 +170,10 @@ function generateOpenAPI() {
             title: "Twitter Clone API",
             description: "A radically typed API powered by Zod and TypeScript.",
         },
-        servers: [{ url: "http://localhost:3000" }],
+        servers: [
+            { url: "https://twitterapi-6tp6.onrender.com", description: "Production Server" },
+            { url: "http://localhost:3000", description: "Local Development Server" }
+        ],
     });
 
     fs.writeFileSync("./swagger-output.json", JSON.stringify(document, null, 2), { encoding: "utf-8" });
