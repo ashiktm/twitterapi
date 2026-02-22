@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import UserService from "../user/user.service.js";
 import { UserSignupBody, UserLoginBody, UpdateProfileBody } from "./user.schema.js";
+import sharp from "sharp";
+import cloudinary from "../../config/cloudinary.config.js";
 
 const userService = new UserService();
 
@@ -63,7 +65,34 @@ export const updateProfile = async (req: Request<{}, {}, UpdateProfileBody>, res
 
     const updateSchema: Partial<UpdateProfileBody> = {};
     if (data.bio !== undefined) updateSchema.bio = data.bio;
-    if (data.profilePicture !== undefined) updateSchema.profilePicture = data.profilePicture;
+
+    if (req.file) {
+      // Compress the image buffer using sharp
+      const compressedBuffer = await sharp(req.file.buffer)
+        .resize(500, 500, { fit: "cover" }) // Target standard profile size
+        .webp({ quality: 80 }) // Encode as efficient webp
+        .toBuffer();
+
+      // Wrap cloudinary stream in a promise
+      const secureUrl = await new Promise<string>((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          {
+            folder: "twitter_profiles",
+            resource_type: "image",
+          },
+          (error, result) => {
+            if (error) return reject(error);
+            if (result) return resolve(result.secure_url);
+            reject(new Error("Unknown Cloudinary Upload Error"));
+          }
+        );
+        stream.end(compressedBuffer);
+      });
+
+      updateSchema.profilePicture = secureUrl;
+    } else if (data.profilePicture !== undefined) {
+      updateSchema.profilePicture = data.profilePicture;
+    }
 
     const response = await userService.updateProfile(userId.toString(), updateSchema);
     if (!response) {

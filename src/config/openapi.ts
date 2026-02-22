@@ -1,5 +1,6 @@
 import { OpenApiGeneratorV3, OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import * as fs from "fs";
+import { z } from "zod";
 
 import { userSignupSchema, userLoginSchema, updateProfileSchema } from "../modules/user/user.schema.js";
 import { createTweetSchema } from "../modules/tweet/tweet.schema.js";
@@ -67,7 +68,14 @@ registry.registerPath({
     security: [{ [bearerAuth.name]: [] }],
     request: {
         body: {
-            content: { "application/json": { schema: updateProfileSchema } },
+            content: {
+                "multipart/form-data": {
+                    schema: z.object({
+                        bio: z.string().optional(),
+                        profilePicture: z.string().optional().openapi({ type: "string", format: "binary" }),
+                    })
+                }
+            },
         },
     },
     responses: { 200: { description: "Success" }, 500: { description: "Server Error" }, 401: { description: "Unauthorized" } },
