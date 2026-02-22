@@ -1,5 +1,5 @@
-import Hashtag from "../models/hastag.js";
-import CrudRepository from "./crudRepository.js";
+import Hashtag from "../hashtag/hashtag.model.js";
+import CrudRepository from "../../common/crud.repository.js";
 
 export default class hashtagRepository extends CrudRepository {
   constructor() {

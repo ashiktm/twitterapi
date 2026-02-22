@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { LikeSerivce } from "../service/like-service.js";
+import { LikeSerivce } from "../like/like.service.js";
 
 const likeSerivce = new LikeSerivce();
 

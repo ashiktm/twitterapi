@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CommentService from "../service/comment-service.js";
+import CommentService from "../comment/comment.service.js";
 
 const commentService = new CommentService();
 

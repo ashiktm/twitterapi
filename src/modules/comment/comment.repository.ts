@@ -1,5 +1,5 @@
-import Comment from "../models/comment.js";
-import CrudRepository from "./crudRepository.js";
+import Comment from "../comment/comment.model.js";
+import CrudRepository from "../../common/crud.repository.js";
 
 export default class CommentRepository extends CrudRepository {
   constructor() {

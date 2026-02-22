@@ -1,8 +1,8 @@
 import express from "express";
 
 import connect from "./config/database-config.js";
-import Hashtag from "./models/hastag.js";
-import Tweet from "./models/tweet.js";
+import Hashtag from "./modules/hashtag/hashtag.model.js";
+import Tweet from "./modules/tweet/tweet.model.js";
 import router from "./routes/index.js";
 import passport from "passport";
 import cors from "cors";

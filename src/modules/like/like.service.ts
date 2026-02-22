@@ -1,6 +1,6 @@
-import CommentRepository from "../repository/comment-repository.js";
-import LikeRepository from "../repository/likeRepository.js";
-import TweetRepository from "../repository/tweetRepository.js";
+import CommentRepository from "../comment/comment.repository.js";
+import LikeRepository from "../like/like.repository.js";
+import TweetRepository from "../tweet/tweet.repository.js";
 
 export class LikeSerivce {
   likeRepository: any;

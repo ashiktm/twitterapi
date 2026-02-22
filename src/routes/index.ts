@@ -1,8 +1,8 @@
 import express from "express";
-import { createComment } from "../controller/commentController.js";
-import { toggleLike } from "../controller/toggleLike-controller.js";
-import { createTweet, getTweet, getTweetAll, searchTweetByTag } from "../controller/tweet-controller.js";
-import { createUser, loginUser, updateProfile, getProfile } from "../controller/user-controller.js";
+import { createComment } from "../modules/comment/comment.controller.js";
+import { toggleLike } from "../modules/like/like.controller.js";
+import { createTweet, getTweet, getTweetAll, searchTweetByTag } from "../modules/tweet/tweet.controller.js";
+import { createUser, loginUser, updateProfile, getProfile } from "../modules/user/user.controller.js";
 import { authenticate } from "../middleware/authenticate.js";
 
 const router = express.Router();

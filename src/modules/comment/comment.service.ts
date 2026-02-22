@@ -1,5 +1,5 @@
-import CommentRepository from "../repository/comment-repository.js";
-import TweetRepository from "../repository/tweetRepository.js";
+import CommentRepository from "../comment/comment.repository.js";
+import TweetRepository from "../tweet/tweet.repository.js";
 
 export default class CommentService {
   commentRepository: any;

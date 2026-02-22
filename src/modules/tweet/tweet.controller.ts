@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import TweetService from "../service/tweet-service.js";
+import TweetService from "../tweet/tweet.service.js";
 
 const tweetService = new TweetService();
 
