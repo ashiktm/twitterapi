@@ -84,6 +84,22 @@ export default class TweetRepository extends CrudRepository<ITweet> {
               select: "user",
               populate: { path: "user", select: "username" },
             },
+            {
+              path: "comments",
+              populate: [
+                {
+                  path: "user",
+                  select: "username",
+                },
+                {
+                  path: "comments",
+                  populate: {
+                    path: "user",
+                    select: "username",
+                  },
+                },
+              ],
+            },
           ],
         })
         .populate({
