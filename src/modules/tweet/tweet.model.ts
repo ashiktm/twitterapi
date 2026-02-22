@@ -6,6 +6,8 @@ export interface ITweet extends Document {
   noOfRetweet?: number;
   comments: Types.ObjectId[];
   createdby: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const tweetSchema = new mongoose.Schema<ITweet>({
@@ -23,7 +25,7 @@ const tweetSchema = new mongoose.Schema<ITweet>({
     ref: "User",
     required: true,
   },
-});
+}, { timestamps: true });
 const Tweet = mongoose.model<ITweet>("Tweet", tweetSchema);
 
 export default Tweet;

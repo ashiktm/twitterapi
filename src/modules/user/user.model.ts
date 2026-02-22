@@ -12,6 +12,8 @@ export interface IUser extends Document {
   comparePassword(password: string): boolean;
   genJWT(): string;
   _id: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -37,7 +39,7 @@ const userSchema = new mongoose.Schema<IUser>({
       type: mongoose.Schema.Types.ObjectId,
     },
   ],
-});
+}, { timestamps: true });
 
 userSchema.pre("save", function (next) {
   const user = this;
