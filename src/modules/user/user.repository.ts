@@ -1,7 +1,7 @@
-import User from "../user/user.model.js";
+import User, { IUser } from "../user/user.model.js";
 import CrudRepository from "../../common/crud.repository.js";
 
-export default class UserRepository extends CrudRepository {
+export default class UserRepository extends CrudRepository<IUser> {
   constructor() {
     super(User);
   }

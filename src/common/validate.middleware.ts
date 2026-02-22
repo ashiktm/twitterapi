@@ -10,11 +10,11 @@ export const validateRequest = (schema: ZodSchema) => {
             if (error instanceof ZodError) {
                 return res.status(400).json({
                     success: false,
-                    message: "Validation failed",
-                    errors: (error as any).errors.map((e: any) => ({
-                        field: e.path.join("."),
-                        message: e.message,
-                    })),
+                    message: "Validation Error",
+                    errors: error.issues.map((e) => ({
+                        path: e.path.join('.'),
+                        message: e.message
+                    }))
                 });
             }
             return res.status(500).json({ success: false, message: "Internal Server Error" });

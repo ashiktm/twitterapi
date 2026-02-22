@@ -1,7 +1,8 @@
 import passport from "passport";
+import { Request, Response, NextFunction } from "express";
 
-export const authenticate = (req: any, res: any, next: any) => {
-  passport.authenticate("jwt", (err: any, user: any) => {
+export const authenticate = (req: Request, res: Response, next: NextFunction) => {
+  passport.authenticate("jwt", (err: Error, user: any) => {
     if (err) next(err);
     if (!user) {
       return res.status(401).json({

@@ -1,11 +1,11 @@
-import Comment from "../comment/comment.model.js";
+import Comment, { IComment } from "../comment/comment.model.js";
 import CrudRepository from "../../common/crud.repository.js";
 
-export default class CommentRepository extends CrudRepository {
+export default class CommentRepository extends CrudRepository<IComment> {
   constructor() {
     super(Comment);
   }
-  async getComment(id) {
+  async getComment(id: string) {
     try {
       const result = await this.model.findOne({ _id: id }).populate({
         path: "user",

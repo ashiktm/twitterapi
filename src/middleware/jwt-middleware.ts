@@ -1,15 +1,13 @@
-import JWT from "passport-jwt";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import User from "../modules/user/user.model.js";
-
-const JwtStrategy = JWT.Strategy;
-const ExtractJwt = JWT.ExtractJwt;
+import { PassportStatic } from "passport";
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: "twitter_secret",
 };
 
-export const passportAuth = (passport: any) => {
+export const passportAuth = (passport: PassportStatic) => {
   passport.use(
     new JwtStrategy(opts, async (jwt_payload, done) => {
       const user = await User.findById(jwt_payload.id);

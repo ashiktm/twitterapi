@@ -1,6 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Types, Model } from "mongoose";
 
-const commentSchema = new mongoose.Schema({
+export interface IComment extends Document {
+  content?: string;
+  user?: mongoose.Types.ObjectId;
+  onModel: "Tweet" | "Comment";
+  comments: Types.ObjectId[];
+  likes: Types.ObjectId[];
+  commentable: Types.ObjectId;
+}
+
+const commentSchema = new mongoose.Schema<IComment>({
   content: {
     type: String,
   },
@@ -15,14 +24,14 @@ const commentSchema = new mongoose.Schema({
     required: true,
     enum: ["Tweet", "Comment"],
   },
-  comments: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],
-  likes: [{ type: mongoose.Types.ObjectId, ref: "Like" }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }],
   commentable: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     refPath: "onModel",
   },
 });
-const Comment = mongoose.model("Comment", commentSchema);
+const Comment = mongoose.model<IComment>("Comment", commentSchema);
 
 export default Comment;

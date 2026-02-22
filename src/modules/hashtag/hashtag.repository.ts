@@ -1,11 +1,11 @@
-import Hashtag from "../hashtag/hashtag.model.js";
+import Hashtag, { IHashtag } from "../hashtag/hashtag.model.js";
 import CrudRepository from "../../common/crud.repository.js";
 
-export default class hashtagRepository extends CrudRepository {
+export default class hashtagRepository extends CrudRepository<IHashtag> {
   constructor() {
     super(Hashtag);
   }
-  async bulkCreate(data) {
+  async bulkCreate(data: Partial<IHashtag>[]) {
     try {
       let hashtags = await Hashtag.insertMany(data);
       return hashtags;
@@ -14,7 +14,7 @@ export default class hashtagRepository extends CrudRepository {
       throw error;
     }
   }
-  async gethashtagByName(name) {
+  async gethashtagByName(name: string) {
     try {
       let hashtag = await Hashtag.find({ text: name });
       return hashtag;
