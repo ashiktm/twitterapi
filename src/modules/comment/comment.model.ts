@@ -7,6 +7,8 @@ export interface IComment extends Document {
   comments: Types.ObjectId[];
   likes: Types.ObjectId[];
   commentable: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const commentSchema = new mongoose.Schema<IComment>({
@@ -31,7 +33,7 @@ const commentSchema = new mongoose.Schema<IComment>({
     required: true,
     refPath: "onModel",
   },
-});
+}, { timestamps: true });
 const Comment = mongoose.model<IComment>("Comment", commentSchema);
 
 export default Comment;
