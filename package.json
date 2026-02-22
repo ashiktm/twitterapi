@@ -5,13 +5,17 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "swagger": "node swagger.js",
-    "prestart": "npm run swagger",
-    "start": "npx nodemon ./src/index"
+    "start": "tsx watch src/index.ts",
+    "build": "tsc",
+    "serve": "node dist/index.js",
+    "swagger": "tsx src/config/openapi.ts",
+    "prestart": "npm run swagger"
   },
   "author": "ashik",
   "license": "MIT",
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^8.4.1",
+    "@scalar/express-api-reference": "^0.8.44",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -22,7 +26,18 @@
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
-    "swagger-autogen": "^2.23.7",
-    "swagger-ui-express": "^5.0.1"
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^25.3.0",
+    "@types/passport-jwt": "^4.0.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
