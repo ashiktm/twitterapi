@@ -1,0 +1,79 @@
+﻿src/index.ts(14,36): error TS2345: Argument of type 'NonSharedBuffer' is not assignable to parameter of type 'string'.
+src/middleware/authenticate.ts(3,30): error TS7006: Parameter 'req' implicitly has an 'any' type.
+src/middleware/authenticate.ts(3,35): error TS7006: Parameter 'res' implicitly has an 'any' type.
+src/middleware/authenticate.ts(3,40): error TS7006: Parameter 'next' implicitly has an 'any' type.
+src/middleware/authenticate.ts(4,33): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/middleware/authenticate.ts(4,38): error TS7006: Parameter 'user' implicitly has an 'any' type.
+src/middleware/jwt-middleware.ts(12,30): error TS7006: Parameter 'passport' implicitly has an 'any' type.
+src/repository/comment-repository.ts(8,20): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/repository/comment-repository.ts(10,33): error TS2339: Property 'model' does not exist on type 'CommentRepository'.
+src/repository/crudRepository.ts(2,15): error TS7006: Parameter 'model' implicitly has an 'any' type.
+src/repository/crudRepository.ts(3,10): error TS2339: Property 'model' does not exist on type 'CrudRepository'.
+src/repository/crudRepository.ts(6,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/repository/crudRepository.ts(9,33): error TS2339: Property 'model' does not exist on type 'CrudRepository'.
+src/repository/crudRepository.ts(17,17): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/repository/crudRepository.ts(19,33): error TS2339: Property 'model' does not exist on type 'CrudRepository'.
+src/repository/crudRepository.ts(27,13): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/repository/crudRepository.ts(29,33): error TS2339: Property 'model' does not exist on type 'CrudRepository'.
+src/repository/crudRepository.ts(39,33): error TS2339: Property 'model' does not exist on type 'CrudRepository'.
+src/repository/crudRepository.ts(47,16): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/repository/crudRepository.ts(47,20): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/repository/crudRepository.ts(49,33): error TS2339: Property 'model' does not exist on type 'CrudRepository'.
+src/repository/crudRepository.ts(56,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/repository/crudRepository.ts(58,33): error TS2339: Property 'model' does not exist on type 'CrudRepository'.
+src/repository/hashtagRepository.ts(8,20): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/repository/hashtagRepository.ts(17,26): error TS7006: Parameter 'name' implicitly has an 'any' type.
+src/repository/likeRepository.ts(8,29): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/repository/tweetRepository.ts(10,33): error TS2339: Property 'model' does not exist on type 'TweetRepository'.
+src/repository/tweetRepository.ts(66,18): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/repository/tweetRepository.ts(68,33): error TS2339: Property 'model' does not exist on type 'TweetRepository'.
+src/repository/tweetRepository.ts(99,37): error TS7006: Parameter 'comment' implicitly has an 'any' type.
+src/repository/tweetRepository.ts(129,15): error TS2663: Cannot find name 'populateCommentsRecursively'. Did you mean the instance member 'this.populateCommentsRecursively'?
+src/service/comment-service.ts(6,10): error TS2339: Property 'commentRepository' does not exist on type 'CommentService'.
+src/service/comment-service.ts(7,10): error TS2339: Property 'tweetRepository' does not exist on type 'CommentService'.
+src/service/comment-service.ts(10,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/service/comment-service.ts(12,32): error TS2339: Property 'commentRepository' does not exist on type 'CommentService'.
+src/service/comment-service.ts(15,32): error TS2339: Property 'tweetRepository' does not exist on type 'CommentService'.
+src/service/comment-service.ts(19,35): error TS2339: Property 'commentRepository' does not exist on type 'CommentService'.
+src/service/comment-service.ts(24,35): error TS2339: Property 'commentRepository' does not exist on type 'CommentService'.
+src/service/comment-service.ts(32,20): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/service/comment-service.ts(33,32): error TS2339: Property 'commentRepository' does not exist on type 'CommentService'.
+src/service/like-service.ts(7,10): error TS2339: Property 'likeRepository' does not exist on type 'LikeSerivce'.
+src/service/like-service.ts(8,10): error TS2339: Property 'tweetRepository' does not exist on type 'LikeSerivce'.
+src/service/like-service.ts(9,10): error TS2339: Property 'commentRepository' does not exist on type 'LikeSerivce'.
+src/service/like-service.ts(12,22): error TS7031: Binding element 'likable' implicitly has an 'any' type.
+src/service/like-service.ts(12,31): error TS7031: Binding element 'onModel' implicitly has an 'any' type.
+src/service/like-service.ts(12,40): error TS7031: Binding element 'user' implicitly has an 'any' type.
+src/service/like-service.ts(15,29): error TS2339: Property 'tweetRepository' does not exist on type 'LikeSerivce'.
+src/service/like-service.ts(17,29): error TS2339: Property 'commentRepository' does not exist on type 'LikeSerivce'.
+src/service/like-service.ts(19,29): error TS2339: Property 'likeRepository' does not exist on type 'LikeSerivce'.
+src/service/like-service.ts(28,18): error TS2339: Property 'likeRepository' does not exist on type 'LikeSerivce'.
+src/service/like-service.ts(30,32): error TS2339: Property 'likeRepository' does not exist on type 'LikeSerivce'.
+src/service/tweet-service.ts(6,10): error TS2339: Property 'tweetRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(7,10): error TS2339: Property 'hashtagRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(10,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/service/tweet-service.ts(16,60): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/service/tweet-service.ts(18,32): error TS2339: Property 'tweetRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(19,44): error TS2339: Property 'hashtagRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(20,60): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/service/tweet-service.ts(21,35): error TS7006: Parameter 'dat' implicitly has an 'any' type.
+src/service/tweet-service.ts(22,34): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/service/tweet-service.ts(29,18): error TS2339: Property 'hashtagRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(31,40): error TS7006: Parameter 'tag' implicitly has an 'any' type.
+src/service/tweet-service.ts(36,33): error TS2339: Property 'tweetRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(43,18): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/service/tweet-service.ts(44,30): error TS2339: Property 'tweetRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(48,30): error TS2339: Property 'tweetRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(52,28): error TS7006: Parameter 'tagText' implicitly has an 'any' type.
+src/service/tweet-service.ts(56,32): error TS2339: Property 'hashtagRepository' does not exist on type 'TweetService'.
+src/service/tweet-service.ts(61,31): error TS2339: Property 'tweetRepository' does not exist on type 'TweetService'.
+src/service/user-service.ts(5,10): error TS2339: Property 'userRepository' does not exist on type 'UserService'.
+src/service/user-service.ts(8,16): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/service/user-service.ts(10,31): error TS2339: Property 'userRepository' does not exist on type 'UserService'.
+src/service/user-service.ts(18,15): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/service/user-service.ts(20,31): error TS2339: Property 'userRepository' does not exist on type 'UserService'.
+src/service/user-service.ts(42,23): error TS7006: Parameter 'userId' implicitly has an 'any' type.
+src/service/user-service.ts(42,31): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/service/user-service.ts(44,31): error TS2339: Property 'userRepository' does not exist on type 'UserService'.
+src/service/user-service.ts(52,20): error TS7006: Parameter 'userId' implicitly has an 'any' type.
+src/service/user-service.ts(54,31): error TS2339: Property 'userRepository' does not exist on type 'UserService'.

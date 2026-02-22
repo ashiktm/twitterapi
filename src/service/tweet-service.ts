@@ -2,6 +2,9 @@ import hashtagRepository from "../repository/hashtagRepository.js";
 import TweetRepository from "../repository/tweetRepository.js";
 
 export default class TweetService {
+  tweetRepository: any;
+  hashtagRepository: any;
+
   constructor() {
     this.tweetRepository = new TweetRepository();
     this.hashtagRepository = new hashtagRepository();

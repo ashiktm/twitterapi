@@ -1,11 +1,13 @@
+import { Request, Response } from "express";
 import TweetService from "../service/tweet-service.js";
 
 const tweetService = new TweetService();
 
-export const createTweet = async (req, res) => {
+export const createTweet = async (req: Request, res: Response) => {
   try {
     let data = req.body;
-    data.user = req.user._id;
+    data.user = req.user?._id;
+    if (!data.user) return res.status(401).json({ success: false, message: "Unauthorized" });
     console.log("bbbbb", req.user);
     let response = await tweetService.create(data);
     return res.status(200).json({
@@ -23,7 +25,7 @@ export const createTweet = async (req, res) => {
     });
   }
 };
-export const getTweet = async (req, res) => {
+export const getTweet = async (req: Request, res: Response) => {
   try {
     console.log(req.params);
     const data = req.params.id;
@@ -43,7 +45,7 @@ export const getTweet = async (req, res) => {
     });
   }
 };
-export const getTweetAll = async (req, res) => {
+export const getTweetAll = async (req: Request, res: Response) => {
   try {
     const response = await tweetService.getTweetAll();
     return res.status(200).json({
@@ -62,7 +64,7 @@ export const getTweetAll = async (req, res) => {
   }
 };
 
-export const searchTweetByTag = async (req, res) => {
+export const searchTweetByTag = async (req: Request, res: Response) => {
   try {
     const tag = req.params.tag;
     const response = await tweetService.getTweetsByHashtag(tag);

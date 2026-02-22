@@ -3,6 +3,10 @@ import LikeRepository from "../repository/likeRepository.js";
 import TweetRepository from "../repository/tweetRepository.js";
 
 export class LikeSerivce {
+  likeRepository: any;
+  tweetRepository: any;
+  commentRepository: any;
+
   constructor() {
     this.likeRepository = new LikeRepository();
     this.tweetRepository = new TweetRepository();

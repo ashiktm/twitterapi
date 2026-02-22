@@ -1,0 +1,2 @@
+﻿src/index.ts(14,36): error TS2345: Argument of type 'NonSharedBuffer' is not assignable to parameter of type 'string'.
+src/repository/tweetRepository.ts(129,15): error TS2663: Cannot find name 'populateCommentsRecursively'. Did you mean the instance member 'this.populateCommentsRecursively'?

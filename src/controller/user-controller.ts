@@ -1,8 +1,9 @@
+import { Request, Response } from "express";
 import UserService from "../service/user-service.js";
 
 const userService = new UserService();
 
-export const createUser = async (req, res) => {
+export const createUser = async (req: Request, res: Response) => {
   try {
     const data = req.body;
 
@@ -23,7 +24,7 @@ export const createUser = async (req, res) => {
     });
   }
 };
-export const loginUser = async (req, res) => {
+export const loginUser = async (req: Request, res: Response) => {
   try {
     const data = req.body;
 
@@ -53,11 +54,13 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const updateProfile = async (req, res) => {
+export const updateProfile = async (req: Request, res: Response) => {
   try {
     const data = req.body;
-    const userId = req.user._id;
-    const updateSchema = {};
+    const userId = req.user?._id;
+    if (!userId) return res.status(401).json({ success: false, message: "Unauthorized" });
+
+    const updateSchema: any = {};
     if (data.bio !== undefined) updateSchema.bio = data.bio;
     if (data.profilePicture !== undefined) updateSchema.profilePicture = data.profilePicture;
 
@@ -83,7 +86,7 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-export const getProfile = async (req, res) => {
+export const getProfile = async (req: Request, res: Response) => {
   try {
     const userId = req.params.id;
     const response = await userService.getProfile(userId);

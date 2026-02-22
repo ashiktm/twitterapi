@@ -126,7 +126,7 @@ export default class TweetRepository extends CrudRepository {
         .execPopulate();
 
       for (const subComment of comment.comments) {
-        await populateCommentsRecursively(subComment);
+        await this.populateCommentsRecursively(subComment);
       }
       return result;
     }

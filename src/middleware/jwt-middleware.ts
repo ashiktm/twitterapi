@@ -9,7 +9,7 @@ const opts = {
   secretOrKey: "twitter_secret",
 };
 
-export const passportAuth = (passport) => {
+export const passportAuth = (passport: any) => {
   passport.use(
     new JwtStrategy(opts, async (jwt_payload, done) => {
       const user = await User.findById(jwt_payload.id);

@@ -2,6 +2,9 @@ import CommentRepository from "../repository/comment-repository.js";
 import TweetRepository from "../repository/tweetRepository.js";
 
 export default class CommentService {
+  commentRepository: any;
+  tweetRepository: any;
+
   constructor() {
     this.commentRepository = new CommentRepository();
     this.tweetRepository = new TweetRepository();
