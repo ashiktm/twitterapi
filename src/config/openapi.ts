@@ -5,6 +5,7 @@ import { userSignupSchema, userLoginSchema, updateProfileSchema } from "../modul
 import { createTweetSchema } from "../modules/tweet/tweet.schema.js";
 import { createCommentSchema } from "../modules/comment/comment.schema.js";
 import { toggleLikeSchema } from "../modules/like/like.schema.js";
+import { searchHashtagSchema } from "../modules/hashtag/hashtag.schema.js";
 
 const registry = new OpenAPIRegistry();
 
@@ -23,6 +24,7 @@ registry.register("UpdateProfile", updateProfileSchema);
 registry.register("CreateTweet", createTweetSchema);
 registry.register("CreateComment", createCommentSchema);
 registry.register("ToggleLike", toggleLikeSchema);
+registry.register("SearchHashtag", searchHashtagSchema);
 
 // --- ROUTES ---
 
@@ -156,6 +158,26 @@ registry.registerPath({
         },
     },
     responses: { 200: { description: "Success" }, 500: { description: "Server Error" }, 401: { description: "Unauthorized" } },
+});
+
+// Hashtags
+registry.registerPath({
+    method: "get",
+    path: "/api/hashtags",
+    description: "Get all hashtags in the system",
+    summary: "Get All Hashtags",
+    tags: ["Hashtag"],
+    responses: { 200: { description: "Success" }, 500: { description: "Server Error" } },
+});
+
+registry.registerPath({
+    method: "get",
+    path: "/api/hashtags/search/{name}",
+    description: "Search hashtags by name",
+    summary: "Search Hashtag",
+    tags: ["Hashtag"],
+    parameters: [{ name: "name", in: "path", required: true, schema: { type: "string" } }],
+    responses: { 200: { description: "Success" }, 500: { description: "Server Error" } },
 });
 
 
