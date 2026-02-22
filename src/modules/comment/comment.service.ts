@@ -14,7 +14,7 @@ export default class CommentService {
 
   async create(data: CreateCommentBody & { user: string; username: string }) {
     try {
-      let comment = await this.commentRepository.create({ ...data, user: data.username as unknown as Types.ObjectId, commentable: data.commentable as unknown as Types.ObjectId });
+      let comment = await this.commentRepository.create({ ...data, user: data.user as unknown as Types.ObjectId, commentable: data.commentable as unknown as Types.ObjectId });
       if (data.onModel === "Tweet") {
         let tweet = await this.tweetRepository.get(data.commentable);
         if (tweet) {
