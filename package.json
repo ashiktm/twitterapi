@@ -8,12 +8,13 @@
     "start": "tsx watch src/index.ts",
     "build": "tsc",
     "serve": "node dist/index.js",
-    "swagger": "tsx swagger.ts",
+    "swagger": "tsx src/config/openapi.ts",
     "prestart": "npm run swagger"
   },
   "author": "ashik",
   "license": "MIT",
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^8.4.1",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -24,8 +25,8 @@
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
-    "swagger-autogen": "^2.23.7",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
