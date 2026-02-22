@@ -11,6 +11,7 @@ import userRoutes from "./modules/user/user.routes.js";
 import tweetRoutes from "./modules/tweet/tweet.routes.js";
 import likeRoutes from "./modules/like/like.routes.js";
 import commentRoutes from "./modules/comment/comment.routes.js";
+import hashtagRoutes from "./modules/hashtag/hashtag.routes.js";
 
 const app = express();
 
@@ -46,5 +47,6 @@ app.use("/api", userRoutes);
 app.use("/api", tweetRoutes);
 app.use("/api", likeRoutes);
 app.use("/api", commentRoutes);
+app.use("/api", hashtagRoutes);
 
 export default app;
