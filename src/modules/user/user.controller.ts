@@ -57,11 +57,11 @@ export const loginUser = async (req: Request<{}, {}, UserLoginBody>, res: Respon
 
 export const updateProfile = async (req: Request<{}, {}, UpdateProfileBody>, res: Response) => {
   try {
-    const data: any = req.body;
+    const data = req.body;
     const userId = req.user?._id;
     if (!userId) return res.status(401).json({ success: false, message: "Unauthorized" });
 
-    const updateSchema: any = {};
+    const updateSchema: Partial<UpdateProfileBody> = {};
     if (data.bio !== undefined) updateSchema.bio = data.bio;
     if (data.profilePicture !== undefined) updateSchema.profilePicture = data.profilePicture;
 

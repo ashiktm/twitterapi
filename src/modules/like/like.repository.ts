@@ -5,7 +5,7 @@ export default class LikeRepository extends CrudRepository<ILike> {
   constructor() {
     super(Like);
   }
-  async finbyUserAndLikable(data: any) {
+  async finbyUserAndLikable(data: Partial<ILike>) {
     try {
     } catch (error) { }
   }

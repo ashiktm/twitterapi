@@ -1,5 +1,7 @@
 import hashtagRepository from "../hashtag/hashtag.repository.js";
 import TweetRepository from "../tweet/tweet.repository.js";
+import { IHashtag } from "../hashtag/hashtag.model.js";
+import { Types } from "mongoose";
 
 export default class TweetService {
   tweetRepository: TweetRepository;
@@ -10,19 +12,19 @@ export default class TweetService {
     this.hashtagRepository = new hashtagRepository();
   }
 
-  async create(data: any) {
+  async create(data: { content: string; user: { _id: string } }) {
     try {
       const content = data.content;
 
       console.log(data.user);
       console.log(content);
-      const tag = content.match(/#+[a-zA-Z0-9(_)]+/g).map((tag: any) => tag.substring(1).toLowerCase());
+      const tag = content.match(/#+[a-zA-Z0-9(_)]+/g)?.map((tag: string) => tag.substring(1).toLowerCase()) || [];
 
-      const tweet = await this.tweetRepository.create({ ...data, createdby: data.user._id });
-      const alreadyPresentTag = await this.hashtagRepository.gethashtagByName(tag);
-      const alreadyPresentTagText = alreadyPresentTag.map((tag: any) => tag.text);
-      let createTag = tag.filter((dat: any) => !alreadyPresentTagText.includes(dat));
-      createTag = createTag.map((tag: any) => {
+      const tweet = await this.tweetRepository.create({ ...data, createdby: data.user._id as unknown as Types.ObjectId });
+      const alreadyPresentTag = await this.hashtagRepository.gethashtagByName(tag as unknown as string);
+      const alreadyPresentTagText = alreadyPresentTag.map((tag: IHashtag) => tag.text);
+      let createTag: any = tag.filter((dat: string) => !alreadyPresentTagText.includes(dat));
+      createTag = createTag.map((tag: string) => {
         return {
           text: tag,
           tweets: [tweet.id],
@@ -31,7 +33,7 @@ export default class TweetService {
 
       await this.hashtagRepository.bulkCreate(createTag);
       //   if (alreadyPresentTag.length > 1)
-      alreadyPresentTag.forEach(async (tag: any) => {
+      alreadyPresentTag.forEach(async (tag: IHashtag) => {
         tag.tweets.push(tweet.id);
         console.log(tag);
         tag.save();

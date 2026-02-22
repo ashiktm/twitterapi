@@ -2,7 +2,7 @@ import mongoose, { Document, Types, Model } from "mongoose";
 
 export interface IComment extends Document {
   content?: string;
-  user?: any;
+  user?: mongoose.Types.ObjectId;
   onModel: "Tweet" | "Comment";
   comments: Types.ObjectId[];
   likes: Types.ObjectId[];

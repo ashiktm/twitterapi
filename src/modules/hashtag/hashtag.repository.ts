@@ -5,7 +5,7 @@ export default class hashtagRepository extends CrudRepository<IHashtag> {
   constructor() {
     super(Hashtag);
   }
-  async bulkCreate(data: any[]) {
+  async bulkCreate(data: Partial<IHashtag>[]) {
     try {
       let hashtags = await Hashtag.insertMany(data);
       return hashtags;

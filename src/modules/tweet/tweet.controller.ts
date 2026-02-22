@@ -6,11 +6,11 @@ const tweetService = new TweetService();
 
 export const createTweet = async (req: Request<{}, {}, CreateTweetBody>, res: Response) => {
   try {
-    let data: any = req.body;
-    data.user = req.user?._id;
-    if (!data.user) return res.status(401).json({ success: false, message: "Unauthorized" });
+    let data: CreateTweetBody = req.body;
+    const userId = req.user?._id?.toString();
+    if (!userId) return res.status(401).json({ success: false, message: "Unauthorized" });
     console.log("bbbbb", req.user);
-    let response = await tweetService.create(data);
+    let response = await tweetService.create({ content: data.content, user: { _id: userId } });
     return res.status(200).json({
       success: true,
       message: "data created successfully",

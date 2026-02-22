@@ -1,4 +1,5 @@
 import UserRepository from "../user/user.repository.js";
+import { UserSignupBody, UserLoginBody, UpdateProfileBody } from "./user.schema.js";
 
 export default class UserService {
   userRepository: UserRepository;
@@ -7,7 +8,7 @@ export default class UserService {
     this.userRepository = new UserRepository();
   }
 
-  async signup(data: any) {
+  async signup(data: UserSignupBody) {
     try {
       const user = await this.userRepository.create(data);
 
@@ -17,7 +18,7 @@ export default class UserService {
       throw error;
     }
   }
-  async login(data: any) {
+  async login(data: UserLoginBody) {
     try {
       const user = await this.userRepository.findby({ email: data.email });
       console.log("user", user);
@@ -37,7 +38,7 @@ export default class UserService {
     }
   }
 
-  async updateProfile(userId: string, data: any) {
+  async updateProfile(userId: string, data: Partial<UpdateProfileBody>) {
     try {
       const user = await this.userRepository.update(userId, data);
       return user;

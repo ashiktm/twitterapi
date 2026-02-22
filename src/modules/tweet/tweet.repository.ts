@@ -1,11 +1,12 @@
 import Tweet, { ITweet } from "../tweet/tweet.model.js";
 import CrudRepository from "../../common/crud.repository.js";
+import { FilterQuery, Document } from "mongoose";
 
 export default class TweetRepository extends CrudRepository<ITweet> {
   constructor() {
     super(Tweet);
   }
-  async getAllTweet(query: any = {}) {
+  async getAllTweet(query: FilterQuery<ITweet> = {}) {
     try {
       const result = await this.model
         .find(query)
@@ -96,9 +97,9 @@ export default class TweetRepository extends CrudRepository<ITweet> {
       throw error;
     }
   }
-  async populateCommentsRecursively(comment: any) {
+  async populateCommentsRecursively(comment: Document & { comments?: any[] }) {
     if (comment.comments && comment.comments.length > 0) {
-      const result = await comment
+      const result = await (comment as any)
         .populate({
           path: "comments",
           populate: [
