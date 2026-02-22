@@ -15,7 +15,7 @@ const swaggerDocument = JSON.parse(readFileSync(new URL('../swagger-output.json'
 
 import { passportAuth } from "./middleware/jwt-middleware.js";
 const app = express();
-app.use('/api-docs', apiReference({ spec: { content: swaggerDocument } }));
+app.use('/api-docs', apiReference({ spec: { content: swaggerDocument } } as any));
 
 app.use(cookieParser());
 // app.use(cors());
