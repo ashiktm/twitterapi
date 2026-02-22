@@ -7,9 +7,16 @@ import router from "./routes/index.js";
 import passport from "passport";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
+import { readFileSync } from 'fs';
+
+// Load swagger file synchronously
+const swaggerDocument = JSON.parse(readFileSync(new URL('../swagger-output.json', import.meta.url)));
 
 import { passportAuth } from "./middleware/jwt-middleware.js";
 const app = express();
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use(cookieParser());
 // app.use(cors());
 app.use((req, res, next) => {
