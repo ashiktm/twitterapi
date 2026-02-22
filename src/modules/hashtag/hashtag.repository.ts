@@ -14,7 +14,7 @@ export default class hashtagRepository extends CrudRepository<IHashtag> {
       throw error;
     }
   }
-  async gethashtagByName(name: string) {
+  async gethashtagByName(name: string | string[]) {
     try {
       let hashtag = await Hashtag.find({ text: name });
       return hashtag;

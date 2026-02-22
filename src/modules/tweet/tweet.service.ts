@@ -21,17 +21,18 @@ export default class TweetService {
       const tag = content.match(/#+[a-zA-Z0-9(_)]+/g)?.map((tag: string) => tag.substring(1).toLowerCase()) || [];
 
       const tweet = await this.tweetRepository.create({ ...data, createdby: data.user._id as unknown as Types.ObjectId });
-      const alreadyPresentTag = await this.hashtagRepository.gethashtagByName(tag as unknown as string);
+      const alreadyPresentTag = await this.hashtagRepository.gethashtagByName(tag);
       const alreadyPresentTagText = alreadyPresentTag.map((tag: IHashtag) => tag.text);
-      let createTag: any = tag.filter((dat: string) => !alreadyPresentTagText.includes(dat));
-      createTag = createTag.map((tag: string) => {
+      let createTag: Partial<IHashtag>[] = tag.filter((dat: string) => !alreadyPresentTagText.includes(dat)).map((tag: string) => {
         return {
           text: tag,
-          tweets: [tweet.id],
+          tweets: [tweet.id as unknown as Types.ObjectId],
         };
       });
 
-      await this.hashtagRepository.bulkCreate(createTag);
+      if (createTag.length > 0) {
+        await this.hashtagRepository.bulkCreate(createTag);
+      }
       //   if (alreadyPresentTag.length > 1)
       alreadyPresentTag.forEach(async (tag: IHashtag) => {
         tag.tweets.push(tweet.id);
