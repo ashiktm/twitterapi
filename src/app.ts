@@ -26,30 +26,27 @@ try {
 
 app.use('/api-docs', apiReference({ spec: { content: swaggerDocument } } as any));
 app.use(cookieParser());
-app.use((req, res, next) => {
-    // 1. Define your allowed origins
-    const allowedOrigins = [
-        'http://localhost:4200', 
-        'https://twitter-frontend-app.netlify.app'
-    ];
-    
-    // 2. Get the origin of the incoming request
-    const origin = req.headers.origin;
 
-    // 3. If the origin is in our list, set the header dynamically
-    if (allowedOrigins.includes(origin)) {
-        res.header("Access-Control-Allow-Origin", origin);
-    }
+// --- UPDATED CORS IMPLEMENTATION ---
+const allowedOrigins = [
+    'http://localhost:4200', 
+    'https://twitter-frontend-app.netlify.app'
+];
 
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie, Keep-Alive"
-    );
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    
-    // 4. Properly call next() without extra text
-    next();
-});
+app.use(cors({
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like Postman/mobile apps) or allowed origins
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true, // CRITICAL: This allows cookies to be sent across origins!
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'Set-Cookie', 'Keep-Alive']
+}));
+// -----------------------------------
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
