@@ -23,11 +23,14 @@ try {
     console.log("Swagger file not found initially. Run 'npm run swagger' to generate it.");
     swaggerDocument = {};
 }
-
+const allowedOrigins = [
+        'http://localhost:4200', 
+        'https://twitter-frontend-app.netlify.app'
+    ];
 app.use('/api-docs', apiReference({ spec: { content: swaggerDocument } } as any));
 app.use(cookieParser());
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.header("Access-Control-Allow-Origin" ,allowedOrigins );
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept,Authorization,Set-Cookie,Keep-Alive"
