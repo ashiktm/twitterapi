@@ -23,19 +23,31 @@ try {
     console.log("Swagger file not found initially. Run 'npm run swagger' to generate it.");
     swaggerDocument = {};
 }
-const allowedOrigins = [
-        'http://localhost:4200', 
-        'https://twitter-frontend-app.netlify.app'
-    ];
+
 app.use('/api-docs', apiReference({ spec: { content: swaggerDocument } } as any));
 app.use(cookieParser());
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin" ,allowedOrigins );
+    // 1. Define your allowed origins
+    const allowedOrigins = [
+        'http://localhost:4200', 
+        'https://twitter-frontend-app.netlify.app'
+    ];
+    
+    // 2. Get the origin of the incoming request
+    const origin = req.headers.origin;
+
+    // 3. If the origin is in our list, set the header dynamically
+    if (allowedOrigins.includes(origin)) {
+        res.header("Access-Control-Allow-Origin", origin);
+    }
+
     res.header(
         "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept,Authorization,Set-Cookie,Keep-Alive"
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization, Set-Cookie, Keep-Alive"
     );
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    
+    // 4. Properly call next() without extra text
     next();
 });
 
